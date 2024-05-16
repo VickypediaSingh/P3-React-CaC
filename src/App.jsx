@@ -1,32 +1,33 @@
 import { useState } from "react";
-import { InputBox } from "./components/InputBox";
-import reactLogo from "./assets/react.svg";
-import ccLogo from "/dollar-sign-svgrepo-com.svg";
-import "./App.css";
+import { InputBox } from "./components";
 import useCurrencyInfo from "./hooks/useCurrencyInfo";
 
 function App() {
   const [amount, setAmount] = useState(0);
   const [from, setFrom] = useState("usd");
   const [to, setTo] = useState("inr");
-  const [convertedAmount, setConvertedAmount] = useStat(0);
-  const useCurrencyInfo = useCurrencyInfo(from);
+  const [convertedAmount, setConvertedAmount] = useState(0);
+
+  const currencyInfo = useCurrencyInfo(from);
+
   const options = Object.keys(currencyInfo);
+
   const swap = () => {
-    setFrom(to);
     setTo(from);
+    setFrom(to);
     setConvertedAmount(amount);
     setAmount(convertedAmount);
   };
+
   const convert = () => {
     setConvertedAmount(amount * currencyInfo[to]);
   };
-  // https://www.pexels.com/photo/woman-wearing-pink-and-black-swimtop-909498/
+
   return (
     <div
       className="w-full h-screen flex flex-wrap justify-center items-center bg-cover bg-no-repeat"
       style={{
-        backgroundImage: `url('https://images.pexels.com/photos/909498/pexels-photo-909498.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')`,
+        backgroundImage: `url('https://images.pexels.com/photos/47344/dollar-currency-money-us-dollar-47344.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')`,
       }}
     >
       <div className="w-full">
@@ -41,9 +42,9 @@ function App() {
               <InputBox
                 label="From"
                 amount={amount}
-                currencyOptions={options}
-                onCurrencyChange={(currency) => setAmount(amount)}
                 onAmountChange={(amount) => setAmount(amount)}
+                onCurrencyChange={(currency) => setFrom(currency)}
+                currencyOptions={options}
                 selectCurrency={from}
               />
             </div>
@@ -60,17 +61,16 @@ function App() {
               <InputBox
                 label="To"
                 amount={convertedAmount}
-                currencyOptions={options}
                 onCurrencyChange={(currency) => setTo(currency)}
-                selectCurrency={from}
-                amountDisable
+                currencyOptions={options}
+                selectCurrency={to}
               />
             </div>
             <button
               type="submit"
               className="w-full bg-blue-600 text-white px-4 py-3 rounded-lg"
             >
-              Convert{from.toUpperCase()} to {to.toUpperCase()}
+              Convert from {from.toUpperCase()} to {to.toUpperCase()}
             </button>
           </form>
         </div>
@@ -78,3 +78,5 @@ function App() {
     </div>
   );
 }
+
+export default App;
