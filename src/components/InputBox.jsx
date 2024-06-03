@@ -100,7 +100,7 @@ function InputBox({
   // Use useId for generating a unique ID for the input
   const amountInputID = useId();
 
-  // State for storing currency options
+  // const [currencyOptions, setCurrencyOptions] = useState(["Choose Currency"]);
   const [currencyOptions, setCurrencyOptions] = useState([]);
 
   useEffect(() => {
