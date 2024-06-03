@@ -9,7 +9,7 @@ function useCurrencyInfo(currency) {
       // `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/v1/currencies/${currency}.json`
       .then((res) => res.json())
       .then((res) => setData(res[currency]));
-    // res mein boht saari keys hain viz date and currency itself, we want currency, dnt get confused
+    // res mein boht saari keys hain viz date and currency itself, we want currency, dnt get confused, see bottom
   }, [currency]);
   // console.log(data); //an object containing all the key-value pairs of country name and 1 unit conversion
   return data;
